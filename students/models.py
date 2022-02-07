@@ -30,6 +30,11 @@ class Student(models.Model):
     phone = models.CharField(max_length=40, unique=True)
     email = models.EmailField(unique=True)
     skype_name = models.CharField(max_length=40)
-    ielts_module = models.CharField(verbose_name='IELTS Module', choices=MODULE_CHOICES, default=MODULE_GENERAL)
+    ielts_module = models.CharField(
+        max_length=10,
+        verbose_name='IELTS Module',
+        choices=MODULE_CHOICES,
+        default=MODULE_GENERAL
+    )
     goal_score = models.DecimalField(max_digits=2, decimal_places=1)
     exam_date = models.DateField(null=True)
