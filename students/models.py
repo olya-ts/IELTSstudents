@@ -14,13 +14,13 @@ class Student(models.Model):
         (MODULE_ACADEMIC, 'Academic')
     ]
 
-    PACK_BASIC = 'B'
-    PACK_STANDARD = 'S'
-    PACK_VIP = 'V'
-    PACK_CHOICES = [
-        (PACK_BASIC, 'Basic'),
-        (PACK_STANDARD, 'Standard'),
-        (PACK_VIP, 'VIP')
+    PACKAGE_BASIC = 'B'
+    PACKAGE_STANDARD = 'S'
+    PACKAGE_VIP = 'V'
+    PACKAGE_CHOICES = [
+        (PACKAGE_BASIC, 'Basic'),
+        (PACKAGE_STANDARD, 'Standard'),
+        (PACKAGE_VIP, 'VIP')
     ]
 
     course = models.IntegerField()
@@ -38,3 +38,4 @@ class Student(models.Model):
     )
     goal_score = models.DecimalField(max_digits=2, decimal_places=1)
     exam_date = models.DateField(null=True)
+    package = models.CharField(max_length=10, choices=PACKAGE_CHOICES, default=PACKAGE_STANDARD)
