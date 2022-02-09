@@ -32,16 +32,15 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="05996cec-df24-4add-bd5c-f07308df552e">
-      <console name="MySQL80" type="STANDARD" schema="ieltsstudents" session="Main"><![CDATA[SELECT COUNT(first_name) AS number, name AS curator 
-FROM students_student as s
-JOIN students_curator as c
-ON s.curator_id = c.id
-ORDER BY name
-GROUP BY name;]]></console>
+      <console name="MySQL80" type="STANDARD" schema="ieltsstudents" session="Main"><![CDATA[UPDATE students_student
+SET course = 22 
+WHERE course = 19;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="05996cec-df24-4add-bd5c-f07308df552e" object-ref="consoles/MySQL80" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="05996cec-df24-4add-bd5c-f07308df552e" />
