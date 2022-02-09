@@ -4,6 +4,7 @@ from django.db import models
 class Curator(models.Model):
     name = models.CharField(max_length=30)
     phone = models.CharField(max_length=40, unique=True)
+    objects = models.Manager()
 
 
 class Student(models.Model):
@@ -39,3 +40,4 @@ class Student(models.Model):
     goal_score = models.DecimalField(max_digits=2, decimal_places=1)
     exam_date = models.DateField(null=True)
     package = models.CharField(max_length=10, choices=PACKAGE_CHOICES, default=PACKAGE_STANDARD)
+    objects = models.Manager()

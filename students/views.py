@@ -1,7 +1,9 @@
 from django.shortcuts import render
+from students.models import Curator, Student
 
 
 def display_course20(request):
+    query_set = Student.objects.filter()
     return render(request, 'course20.html')
 
 
