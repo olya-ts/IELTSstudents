@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.db.models.aggregates import Count
 from students.models import Curator, Student
 
 
@@ -51,3 +52,8 @@ def display_course22(request):
         .filter(course=22) \
         .order_by('curator__name', 'first_name', 'last_name')
     return render(request, 'course22.html', {'course22': list(query_set)})
+
+
+def display_curators(request):
+    query_set = Curator.objects.values_list('name', 'phone').order_by('name')
+    return render(request, 'curators.html', {'curators': list(query_set)})
