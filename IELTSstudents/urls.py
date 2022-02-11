@@ -22,3 +22,6 @@ urlpatterns = [
     path('__debug__/', include('debug_toolbar.urls')),
     path('students/', include('students.urls'))
 ]
+
+admin.site.site_header = 'IELTS Course Admin'
+admin.site.index_title = 'Admin Site'

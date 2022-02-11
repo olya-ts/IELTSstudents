@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.db.models.aggregates import Count
 from students.models import Curator, Student
 
 
