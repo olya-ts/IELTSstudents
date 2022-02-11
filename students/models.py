@@ -6,6 +6,12 @@ class Curator(models.Model):
     phone = models.CharField(max_length=40, unique=True)
     objects = models.Manager()
 
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ['name']
+
 
 class Student(models.Model):
     MODULE_GENERAL = 'G'
@@ -41,3 +47,9 @@ class Student(models.Model):
     exam_date = models.DateField(null=True)
     package = models.CharField(max_length=10, choices=PACKAGE_CHOICES, default=PACKAGE_STANDARD)
     objects = models.Manager()
+
+    def __str__(self):
+        return self.last_name
+
+    class Meta:
+        ordering = ['course', 'last_name']
