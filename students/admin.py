@@ -29,6 +29,7 @@ class StudentStatusFilter(admin.SimpleListFilter):
 
 @admin.register(models.Student)
 class StudentAdmin(admin.ModelAdmin):
+    autocomplete_fields = ['curator']
     list_editable = [
         'first_name',
         'last_name',

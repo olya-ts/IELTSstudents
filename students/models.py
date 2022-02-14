@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator, EmailValidator, DecimalValidator
 
 
 class Curator(models.Model):
@@ -30,21 +31,21 @@ class Student(models.Model):
         (PACKAGE_VIP, 'VIP')
     ]
 
-    course = models.IntegerField()
+    course = models.IntegerField(validators=[MinValueValidator(20)])
     curator = models.ForeignKey(Curator, on_delete=models.PROTECT)
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=30)
     phone = models.CharField(max_length=40, unique=True)
-    email = models.EmailField(unique=True)
-    skype_name = models.CharField(max_length=40)
+    email = models.EmailField(unique=True, blank=True, validators=[EmailValidator])
+    skype_name = models.CharField(max_length=40, blank=True)
     ielts_module = models.CharField(
         max_length=10,
         verbose_name='IELTS Module',
         choices=MODULE_CHOICES,
         default=MODULE_GENERAL
     )
-    goal_score = models.DecimalField(max_digits=2, decimal_places=1)
-    exam_date = models.DateField(null=True)
+    goal_score = models.DecimalField(max_digits=2, decimal_places=1, default=7.0, validators=[DecimalValidator(2, 1)])
+    exam_date = models.DateField(null=True, blank=True)
     package = models.CharField(max_length=10, choices=PACKAGE_CHOICES, default=PACKAGE_STANDARD)
     objects = models.Manager()
 
