@@ -1,5 +1,6 @@
 from datetime import datetime, date
 from django.db.models.query import QuerySet
+from django.db.models.aggregates import Count
 from django.contrib import admin
 from . import models
 
@@ -57,3 +58,14 @@ class StudentAdmin(admin.ModelAdmin):
         elif student.exam_date < date(2022, 4, 30):
             return "URGENT"
         return "REGULAR"
+
+
+@admin.register(models.Curator)
+class CuratorAdmin(admin.ModelAdmin):
+    list_display = ['name', 'phone', 'student_count']
+
+    def student_count(self, student):
+        return student.student_count
+
+    def get_queryset(self, request):
+        return super().get_queryset(request).annotate(student_count=Count('student__pk'))
