@@ -65,7 +65,9 @@ class StudentAdmin(admin.ModelAdmin):
 @admin.register(models.Curator)
 class CuratorAdmin(admin.ModelAdmin):
     list_display = ['name', 'phone', 'student_count']
+    search_fields = ['name__istartswith']
 
+    @admin.display(ordering='student_count')
     def student_count(self, curator):
         url = (
             reverse('admin:students_student_changelist')
@@ -74,7 +76,6 @@ class CuratorAdmin(admin.ModelAdmin):
                 'curator__id': str(curator.id)
             }))
         return format_html('<a href="{}">{}</a>', url, curator.student_count)
-        # return format_html('<a href="http://127.0.0.1:8000/admin/students/student/">{}</a>', curator.student_count)
 
     def get_queryset(self, request):
         return super().get_queryset(request).annotate(student_count=Count('student__id'))
