@@ -63,8 +63,14 @@ class StudentAdmin(admin.ModelAdmin):
         return "REGULAR"
 
 
+class StudentInline(admin.StackedInline):
+    model = models.Student
+    extra = 0
+
+
 @admin.register(models.Curator)
 class CuratorAdmin(admin.ModelAdmin):
+    inlines = [StudentInline]
     list_display = ['name', 'phone', 'student_count']
     search_fields = ['name__istartswith']
 
