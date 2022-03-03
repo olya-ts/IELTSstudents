@@ -9,7 +9,10 @@ class CuratorSerializer(serializers.ModelSerializer):
 
 
 class StudentSerializer(serializers.ModelSerializer):
-    curator = CuratorSerializer()
+    curator = serializers.HyperlinkedRelatedField(
+        queryset=Curator.objects.all(),
+        view_name='curators-detail'
+    )
 
     class Meta:
         model = Student
