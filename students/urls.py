@@ -1,10 +1,11 @@
+from rest_framework.routers import SimpleRouter
 from django.urls import path
 from . import views
 
+router = SimpleRouter()
+router.register('course20', views.Course20ViewSet)
+router.register('course21', views.Course21ViewSet)
+router.register('course22', views.Course22ViewSet)
+router.register('curators', views.CuratorViewSet)
 
-urlpatterns = [
-    path('course20/', views.display_course20),
-    path('course21/', views.display_course21),
-    path('course22/', views.display_course22),
-    path('curators/', views.display_curators)
-]
+urlpatterns = router.urls
