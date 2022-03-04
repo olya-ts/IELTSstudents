@@ -54,3 +54,31 @@ class Student(models.Model):
 
     class Meta:
         ordering = ['course', 'last_name']
+
+
+class Teacher(models.Model):
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+    phone = models.CharField(max_length=40, unique=True)
+    email = models.EmailField(unique=True, blank=True, validators=[EmailValidator])
+    skype_name = models.CharField(max_length=40, blank=True)
+    about_me = models.TextField(null=True, blank=True)
+    objects = models.Manager()
+
+    def __str__(self):
+        return self.first_name
+
+    class Meta:
+        ordering = ['first_name', 'last_name']
+
+
+class GroupSession(models.Model):
+    title = models.CharField(max_length=40)
+    description = models.TextField()
+    teacher = models.ManyToManyField(Teacher, related_name='group_sessions')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ['title']

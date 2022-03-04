@@ -26,7 +26,8 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="05996cec-df24-4add-bd5c-f07308df552e">
-        <schema name="ieltsstudents" object-types="table, view" />
+        <schema name="ieltsstudents" object-types="table, view, procedure, function, constraint, index, column, dataset trigger" />
+        <schema name="storefront" object-types="table, view, procedure, function" />
       </connection>
     </loaded-nodes>
   </component>
@@ -36,13 +37,20 @@
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="05996cec-df24-4add-bd5c-f07308df552e" object-ref="schemas/ieltsstudents/tables/students_teacher" />
+      <object connection-id="05996cec-df24-4add-bd5c-f07308df552e" object-ref="schemas/ieltsstudents/tables/students_groupsession_teacher" />
+      <object connection-id="05996cec-df24-4add-bd5c-f07308df552e" object-ref="schemas/ieltsstudents/tables/students_groupsession" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="05996cec-df24-4add-bd5c-f07308df552e" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
     <filter-actions connection-id="05996cec-df24-4add-bd5c-f07308df552e" dataset="ieltsstudents.auth_group" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="05996cec-df24-4add-bd5c-f07308df552e" dataset="ieltsstudents.students_groupsession" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="05996cec-df24-4add-bd5c-f07308df552e" dataset="ieltsstudents.students_teacher" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="05996cec-df24-4add-bd5c-f07308df552e" dataset="ieltsstudents.students_groupsession_teacher" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="05996cec-df24-4add-bd5c-f07308df552e" dataset="ieltsstudents.auth_user" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="05996cec-df24-4add-bd5c-f07308df552e" dataset="ieltsstudents.students_curator" active-filter-id="EMPTY_FILTER" />
   </component>

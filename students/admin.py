@@ -86,3 +86,21 @@ class CuratorAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         return super().get_queryset(request).annotate(student_count=Count('student__id'))
+
+
+@admin.register(models.Teacher)
+class TeacherAdmin(admin.ModelAdmin):
+    list_editable = ['phone', 'skype_name', 'about_me']
+    list_display = ['first_name', 'last_name', 'phone', 'email', 'skype_name', 'about_me']
+    search_fields = ['first_name__istartswith', 'last_name__istartswith']
+
+
+@admin.register(models.GroupSession)
+class GroupSessionAdmin(admin.ModelAdmin):
+    autocomplete_fields = ['teacher']
+    list_display = ['title', 'description', 'teachers']
+    list_editable = ['description']
+    search_fields = ['title__istartswith']
+
+    def teachers(self, obj):
+        return ", ".join([t.first_name for t in obj.teacher.all()])
