@@ -75,6 +75,7 @@ class Teacher(models.Model):
 class GroupSession(models.Model):
     title = models.CharField(max_length=40)
     description = models.TextField()
+    teacher = models.ManyToManyField(Teacher, related_name='groupsessions')
     objects = models.Manager()
 
     def __str__(self):

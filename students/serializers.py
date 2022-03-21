@@ -29,10 +29,10 @@ class TeacherSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Teacher
-        fields = ['first_name', 'last_name', 'phone', 'email', 'skype_name', 'about_me']
+        fields = ['first_name', 'last_name', 'phone', 'email', 'skype_name', 'about_me', 'groupsessions']
 
 
 class GroupSessionSerializer(serializers.ModelSerializer):
     class Meta:
         model = GroupSession
-        fields = ['title', 'description']
+        fields = ['title', 'description', 'teacher']

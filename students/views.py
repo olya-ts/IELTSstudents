@@ -24,10 +24,10 @@ class Course22ViewSet(ModelViewSet):
 
 
 class TeacherViewSet(ModelViewSet):
-    queryset = Teacher.objects.all()
+    queryset = Teacher.objects.prefetch_related('groupsessions').all()
     serializer_class = TeacherSerializer
 
 
 class GroupSessionViewSet(ModelViewSet):
-    queryset = GroupSession.objects.all()
+    queryset = GroupSession.objects.prefetch_related('teacher').all()
     serializer_class = GroupSessionSerializer
