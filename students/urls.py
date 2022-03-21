@@ -7,5 +7,7 @@ router.register('course20', views.Course20ViewSet)
 router.register('course21', views.Course21ViewSet)
 router.register('course22', views.Course22ViewSet)
 router.register('curators', views.CuratorViewSet, basename='curators')
+router.register('teachers', views.TeacherViewSet)
+router.register('group_sessions', views.GroupSessionViewSet)
 
 urlpatterns = router.urls

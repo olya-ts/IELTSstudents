@@ -97,10 +97,9 @@ class TeacherAdmin(admin.ModelAdmin):
 
 @admin.register(models.GroupSession)
 class GroupSessionAdmin(admin.ModelAdmin):
-    autocomplete_fields = ['teacher']
-    list_display = ['title', 'description', 'teachers']
+    list_display = ['title', 'description']
     list_editable = ['description']
     search_fields = ['title__istartswith']
 
-    def teachers(self, obj):
-        return ", ".join([t.first_name for t in obj.teacher.all()])
+    # def teachers(self, obj):
+    #     return ", ".join([t.first_name for t in obj.teacher.all()])

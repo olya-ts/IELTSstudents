@@ -1,6 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
-from .models import Curator, Student
-from .serializers import StudentSerializer, CuratorSerializer
+from .models import Curator, Student, Teacher, GroupSession
+from .serializers import StudentSerializer, CuratorSerializer, TeacherSerializer, GroupSessionSerializer
 
 
 class CuratorViewSet(ModelViewSet):
@@ -21,3 +21,13 @@ class Course21ViewSet(ModelViewSet):
 class Course22ViewSet(ModelViewSet):
     queryset = Student.objects.filter(course=21).select_related('curator').all()
     serializer_class = StudentSerializer
+
+
+class TeacherViewSet(ModelViewSet):
+    queryset = Teacher.objects.all()
+    serializer_class = TeacherSerializer
+
+
+class GroupSessionViewSet(ModelViewSet):
+    queryset = GroupSession.objects.all()
+    serializer_class = GroupSessionSerializer

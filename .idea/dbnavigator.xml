@@ -26,8 +26,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="05996cec-df24-4add-bd5c-f07308df552e">
-        <schema name="ieltsstudents" object-types="table, view, procedure, function, constraint, index, column, dataset trigger" />
-        <schema name="storefront" object-types="table, view, procedure, function" />
+        <schema name="ieltsstudents" object-types="table, view" />
       </connection>
     </loaded-nodes>
   </component>
@@ -37,11 +36,7 @@
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="05996cec-df24-4add-bd5c-f07308df552e" object-ref="schemas/ieltsstudents/tables/students_teacher" />
-      <object connection-id="05996cec-df24-4add-bd5c-f07308df552e" object-ref="schemas/ieltsstudents/tables/students_groupsession_teacher" />
-      <object connection-id="05996cec-df24-4add-bd5c-f07308df552e" object-ref="schemas/ieltsstudents/tables/students_groupsession" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="05996cec-df24-4add-bd5c-f07308df552e" />
