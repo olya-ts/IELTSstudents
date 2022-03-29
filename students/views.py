@@ -47,8 +47,11 @@ class GroupSessionViewSet(ModelViewSet):
 
 
 class ReviewViewSet(ModelViewSet):
-    queryset = Review.objects.all()
+
     serializer_class = ReviewSerializer
+
+    def get_queryset(self):
+        return Review.objects.filter(teacher_id=self.kwargs['teacher_pk'])
 
     def get_serializer_context(self):
         return {'teacher_id': self.kwargs['teacher_pk']}
