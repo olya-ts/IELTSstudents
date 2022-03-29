@@ -20,7 +20,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('__debug__/', include('debug_toolbar.urls')),
-    path('students/', include('students.urls'))
+    path('ielts/', include('students.urls'))
 ]
 
 admin.site.site_header = 'IELTS Course Admin'

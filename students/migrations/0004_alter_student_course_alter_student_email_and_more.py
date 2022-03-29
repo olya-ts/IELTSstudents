@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('ielts', '0003_alter_curator_options_alter_student_options'),
+        ('students', '0003_alter_curator_options_alter_student_options'),
     ]
 
     operations = [

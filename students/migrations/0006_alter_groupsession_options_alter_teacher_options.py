@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('ielts', '0005_teacher_groupsession'),
+        ('students', '0005_teacher_groupsession'),
     ]
 
     operations = [

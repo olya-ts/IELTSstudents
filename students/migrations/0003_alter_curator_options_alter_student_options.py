@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('ielts', '0002_student_package'),
+        ('students', '0002_student_package'),
     ]
 
     operations = [

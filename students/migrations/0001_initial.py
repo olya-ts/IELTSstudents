@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
                 ('ielts_module', models.CharField(choices=[('G', 'General'), ('A', 'Academic')], default='G', max_length=10, verbose_name='IELTS Module')),
                 ('goal_score', models.DecimalField(decimal_places=1, max_digits=2)),
                 ('exam_date', models.DateField(null=True)),
-                ('curator', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='ielts.curator')),
+                ('curator', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='students.curator')),
             ],
         ),
     ]
