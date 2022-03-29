@@ -89,5 +89,5 @@ class Review(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name='reviews')
     name = models.CharField(max_length=50)
     description = models.TextField()
-    date = models.DateField(auto_created=True)
+    date = models.DateField(auto_now_add=True)
     objects = models.Manager()
