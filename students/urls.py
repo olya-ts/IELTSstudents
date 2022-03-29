@@ -1,8 +1,8 @@
-from rest_framework.routers import SimpleRouter
+from rest_framework.routers import DefaultRouter
 from django.urls import path
 from . import views
 
-router = SimpleRouter()
+router = DefaultRouter()
 
 router.register('students', views.StudentViewSet, basename='students')
 router.register('curators', views.CuratorViewSet, basename='curators')
