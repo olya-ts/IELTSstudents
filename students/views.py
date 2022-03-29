@@ -1,8 +1,9 @@
 from rest_framework.viewsets import ModelViewSet
-from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
+from django_filters.rest_framework import DjangoFilterBackend
 from .models import Curator, Student, Teacher, GroupSession
 from .serializers import StudentSerializer, CuratorSerializer, TeacherSerializer, GroupSessionSerializer
+from .pagination import DefaultPagination
 
 
 class CuratorViewSet(ModelViewSet):
@@ -16,6 +17,7 @@ class StudentViewSet(ModelViewSet):
     serializer_class = StudentSerializer
     filter_backends = [OrderingFilter]
     ordering_fields = ['first_name', 'last_name', 'course']
+    pagination_class = DefaultPagination
 
     def get_queryset(self):
         queryset = Student.objects.select_related('curator').all()
