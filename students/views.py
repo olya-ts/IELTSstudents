@@ -1,4 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter
 from .models import Curator, Student, Teacher, GroupSession
 from .serializers import StudentSerializer, CuratorSerializer, TeacherSerializer, GroupSessionSerializer
 
@@ -6,6 +8,8 @@ from .serializers import StudentSerializer, CuratorSerializer, TeacherSerializer
 class CuratorViewSet(ModelViewSet):
     queryset = Curator.objects.all()
     serializer_class = CuratorSerializer
+    filter_backends = [SearchFilter]
+    search_fields = ['name']
 
 
 class StudentViewSet(ModelViewSet):
@@ -20,22 +24,16 @@ class StudentViewSet(ModelViewSet):
 
 
 class TeacherViewSet(ModelViewSet):
+    queryset = Teacher.objects.prefetch_related('groupsessions').all()
     serializer_class = TeacherSerializer
-
-    def get_queryset(self):
-        queryset = Teacher.objects.prefetch_related('groupsessions').all()
-        groupsession_id = self.request.query_params.get('groupsession_id')
-        if groupsession_id is not None:
-            queryset = Teacher.objects.filter(groupsessions=groupsession_id).prefetch_related('groupsessions').all()
-        return queryset
+    filter_backends = [DjangoFilterBackend, SearchFilter]
+    filterset_fields = ['groupsessions']
+    search_fields = ['first_name', 'last_name']
 
 
 class GroupSessionViewSet(ModelViewSet):
+    queryset = GroupSession.objects.prefetch_related('teacher').all()
     serializer_class = GroupSessionSerializer
-
-    def get_queryset(self):
-        queryset = GroupSession.objects.prefetch_related('teacher').all()
-        teacher_id = self.request.query_params.get('teacher_id')
-        if teacher_id is not None:
-            queryset = GroupSession.objects.filter(teacher=teacher_id).prefetch_related('teacher').all()
-        return queryset
+    filter_backends = [DjangoFilterBackend, SearchFilter]
+    filterset_fields = ['teacher']
+    search_fields = ['title']
