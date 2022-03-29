@@ -1,6 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.filters import SearchFilter
+from rest_framework.filters import SearchFilter, OrderingFilter
 from .models import Curator, Student, Teacher, GroupSession
 from .serializers import StudentSerializer, CuratorSerializer, TeacherSerializer, GroupSessionSerializer
 
@@ -14,6 +14,8 @@ class CuratorViewSet(ModelViewSet):
 
 class StudentViewSet(ModelViewSet):
     serializer_class = StudentSerializer
+    filter_backends = [OrderingFilter]
+    ordering_fields = ['first_name', 'last_name', 'course']
 
     def get_queryset(self):
         queryset = Student.objects.select_related('curator').all()
@@ -26,14 +28,16 @@ class StudentViewSet(ModelViewSet):
 class TeacherViewSet(ModelViewSet):
     queryset = Teacher.objects.prefetch_related('groupsessions').all()
     serializer_class = TeacherSerializer
-    filter_backends = [DjangoFilterBackend, SearchFilter]
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     filterset_fields = ['groupsessions']
     search_fields = ['first_name', 'last_name']
+    ordering_fields = ['first_name', 'last_name']
 
 
 class GroupSessionViewSet(ModelViewSet):
     queryset = GroupSession.objects.prefetch_related('teacher').all()
     serializer_class = GroupSessionSerializer
-    filter_backends = [DjangoFilterBackend, SearchFilter]
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     filterset_fields = ['teacher']
     search_fields = ['title']
+    ordering_fields = ['title']
