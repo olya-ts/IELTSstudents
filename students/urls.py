@@ -1,12 +1,14 @@
-from rest_framework.routers import DefaultRouter
-from django.urls import path
+from rest_framework_nested import routers
 from . import views
 
-router = DefaultRouter()
+router = routers.DefaultRouter()
 
 router.register('students', views.StudentViewSet, basename='students')
 router.register('curators', views.CuratorViewSet, basename='curators')
 router.register('teachers', views.TeacherViewSet, basename='teachers')
 router.register('group_sessions', views.GroupSessionViewSet, basename='group_sessions')
 
-urlpatterns = router.urls
+teachers_router = routers.NestedDefaultRouter(router, 'teachers', lookup='teacher')
+teachers_router.register('reviews', views.ReviewViewSet, basename='teacher-reviews')
+
+urlpatterns = router.urls + teachers_router.urls

@@ -34,4 +34,8 @@ class GroupSessionSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = ['id', 'teacher_name', 'name', 'description', 'date']
+        fields = ['id', 'name', 'description', 'date']
+
+    def create(self, validated_data):
+        teacher_id = self.context['teacher_id']
+        return Review.objects.create(teacher_id=teacher_id, **validated_data)
