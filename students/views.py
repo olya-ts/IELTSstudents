@@ -8,26 +8,34 @@ class CuratorViewSet(ModelViewSet):
     serializer_class = CuratorSerializer
 
 
-class Course20ViewSet(ModelViewSet):
-    queryset = Student.objects.filter(course=20).select_related('curator').all()
+class StudentViewSet(ModelViewSet):
     serializer_class = StudentSerializer
 
-
-class Course21ViewSet(ModelViewSet):
-    queryset = Student.objects.filter(course=21).select_related('curator').all()
-    serializer_class = StudentSerializer
-
-
-class Course22ViewSet(ModelViewSet):
-    queryset = Student.objects.filter(course=21).select_related('curator').all()
-    serializer_class = StudentSerializer
+    def get_queryset(self):
+        queryset = Student.objects.select_related('curator').all()
+        course = self.request.query_params.get('course')
+        if course is not None:
+            queryset = Student.objects.filter(course=course).select_related('curator').all()
+        return queryset
 
 
 class TeacherViewSet(ModelViewSet):
-    queryset = Teacher.objects.all()
     serializer_class = TeacherSerializer
+
+    def get_queryset(self):
+        queryset = Teacher.objects.prefetch_related('groupsessions').all()
+        groupsession_id = self.request.query_params.get('groupsession_id')
+        if groupsession_id is not None:
+            queryset = Teacher.objects.filter(groupsessions=groupsession_id).prefetch_related('groupsessions').all()
+        return queryset
 
 
 class GroupSessionViewSet(ModelViewSet):
-    queryset = GroupSession.objects.all()
     serializer_class = GroupSessionSerializer
+
+    def get_queryset(self):
+        queryset = GroupSession.objects.prefetch_related('teacher').all()
+        teacher_id = self.request.query_params.get('teacher_id')
+        if teacher_id is not None:
+            queryset = GroupSession.objects.filter(teacher=teacher_id).prefetch_related('teacher').all()
+        return queryset

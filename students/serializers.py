@@ -19,20 +19,13 @@ class StudentSerializer(serializers.ModelSerializer):
         fields = ['id', 'course', 'curator', 'first_name', 'last_name']
 
 
-# class GroupSessionListingField(serializers.RelatedField):
-#     def to_representation(self, value):
-#         return value.title
-
-
 class TeacherSerializer(serializers.ModelSerializer):
-    # group_sessions = GroupSessionListingField(many=True, read_only=True)
-
     class Meta:
         model = Teacher
-        fields = ['first_name', 'last_name', 'phone', 'email', 'skype_name', 'about_me']
+        fields = ['first_name', 'last_name', 'phone', 'email', 'skype_name', 'about_me', 'groupsessions']
 
 
 class GroupSessionSerializer(serializers.ModelSerializer):
     class Meta:
         model = GroupSession
-        fields = ['title', 'description']
+        fields = ['title', 'description', 'teacher']

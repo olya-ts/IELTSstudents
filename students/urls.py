@@ -3,11 +3,10 @@ from django.urls import path
 from . import views
 
 router = SimpleRouter()
-router.register('course20', views.Course20ViewSet)
-router.register('course21', views.Course21ViewSet)
-router.register('course22', views.Course22ViewSet)
+
+router.register('students', views.StudentViewSet, basename='students')
 router.register('curators', views.CuratorViewSet, basename='curators')
-router.register('teachers', views.TeacherViewSet)
-router.register('group_sessions', views.GroupSessionViewSet)
+router.register('teachers', views.TeacherViewSet, basename='teachers')
+router.register('group_sessions', views.GroupSessionViewSet, basename='group_sessions')
 
 urlpatterns = router.urls
