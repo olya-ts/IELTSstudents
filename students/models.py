@@ -83,3 +83,11 @@ class GroupSession(models.Model):
 
     class Meta:
         ordering = ['title']
+
+
+class Review(models.Model):
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name='reviews')
+    name = models.CharField(max_length=50)
+    description = models.TextField()
+    date = models.DateField(auto_created=True)
+    objects = models.Manager()
