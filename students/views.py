@@ -1,8 +1,9 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.filters import SearchFilter, OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
-from .models import Curator, Student, Teacher, GroupSession
-from .serializers import StudentSerializer, CuratorSerializer, TeacherSerializer, GroupSessionSerializer
+from .models import Curator, Student, Teacher, GroupSession, Review
+from .serializers import StudentSerializer, CuratorSerializer, TeacherSerializer, GroupSessionSerializer, \
+    ReviewSerializer
 from .pagination import DefaultPagination
 
 
@@ -43,3 +44,8 @@ class GroupSessionViewSet(ModelViewSet):
     filterset_fields = ['teacher']
     search_fields = ['title']
     ordering_fields = ['title']
+
+
+class ReviewViewSet(ModelViewSet):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer

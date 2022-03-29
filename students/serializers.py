@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Student, Curator, Teacher, GroupSession
+from .models import Student, Curator, Teacher, GroupSession, Review
 
 
 class CuratorSerializer(serializers.ModelSerializer):
@@ -22,10 +22,16 @@ class StudentSerializer(serializers.ModelSerializer):
 class TeacherSerializer(serializers.ModelSerializer):
     class Meta:
         model = Teacher
-        fields = ['first_name', 'last_name', 'phone', 'email', 'skype_name', 'about_me', 'groupsessions']
+        fields = ['id', 'first_name', 'last_name', 'phone', 'email', 'skype_name', 'about_me', 'groupsessions']
 
 
 class GroupSessionSerializer(serializers.ModelSerializer):
     class Meta:
         model = GroupSession
-        fields = ['title', 'description', 'teacher']
+        fields = ['id', 'title', 'description', 'teacher']
+
+
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = ['id', 'teacher_name', 'name', 'description', 'date']
