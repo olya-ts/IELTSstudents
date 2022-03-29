@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('students', '0004_alter_student_course_alter_student_email_and_more'),
+        ('ielts', '0004_alter_student_course_alter_student_email_and_more'),
     ]
 
     operations = [
@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=40)),
                 ('description', models.TextField()),
-                ('teacher', models.ManyToManyField(to='students.teacher')),
+                ('teacher', models.ManyToManyField(to='ielts.teacher')),
             ],
         ),
     ]

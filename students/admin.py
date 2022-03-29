@@ -90,8 +90,8 @@ class CuratorAdmin(admin.ModelAdmin):
 
 @admin.register(models.Teacher)
 class TeacherAdmin(admin.ModelAdmin):
-    list_editable = ['phone', 'skype_name', 'about_me']
     list_display = ['first_name', 'last_name', 'phone', 'email', 'skype_name', 'about_me']
+    list_editable = ['phone', 'skype_name', 'about_me']
     search_fields = ['first_name__istartswith', 'last_name__istartswith']
 
 
