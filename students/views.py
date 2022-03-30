@@ -47,7 +47,6 @@ class GroupSessionViewSet(ModelViewSet):
 
 
 class ReviewViewSet(ModelViewSet):
-
     serializer_class = ReviewSerializer
 
     def get_queryset(self):
