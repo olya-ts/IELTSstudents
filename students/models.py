@@ -1,10 +1,12 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, EmailValidator, DecimalValidator
 
 
 class Curator(models.Model):
     name = models.CharField(max_length=30)
     phone = models.CharField(max_length=40, unique=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
     objects = models.Manager()
 
     def __str__(self):
@@ -47,6 +49,7 @@ class Student(models.Model):
     goal_score = models.DecimalField(max_digits=2, decimal_places=1, default=7.0, validators=[DecimalValidator(2, 1)])
     exam_date = models.DateField(null=True, blank=True)
     package = models.CharField(max_length=10, choices=PACKAGE_CHOICES, default=PACKAGE_STANDARD)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
     objects = models.Manager()
 
     def __str__(self):
@@ -63,6 +66,7 @@ class Teacher(models.Model):
     email = models.EmailField(unique=True, blank=True, validators=[EmailValidator])
     skype_name = models.CharField(max_length=40, blank=True)
     about_me = models.TextField(null=True, blank=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
     objects = models.Manager()
 
     def __str__(self):

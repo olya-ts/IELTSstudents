@@ -1,5 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.filters import SearchFilter, OrderingFilter
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import Curator, Student, Teacher, GroupSession, Review
 from .serializers import StudentSerializer, CuratorSerializer, TeacherSerializer, GroupSessionSerializer, \
@@ -12,6 +13,13 @@ class CuratorViewSet(ModelViewSet):
     serializer_class = CuratorSerializer
     filter_backends = [SearchFilter]
     search_fields = ['name']
+    permission_classes = [IsAdminUser]
+    http_method_names = ['get', 'post', 'put', 'patch', 'delete', 'head', 'options']
+
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            return [IsAuthenticated()]
+        return [IsAdminUser()]
 
 
 class StudentViewSet(ModelViewSet):
@@ -19,6 +27,8 @@ class StudentViewSet(ModelViewSet):
     filter_backends = [OrderingFilter]
     ordering_fields = ['first_name', 'last_name', 'course']
     pagination_class = DefaultPagination
+    permission_classes = [IsAuthenticated]
+    http_method_names = ['get', 'post', 'put', 'patch', 'delete', 'head', 'options']
 
     def get_queryset(self):
         queryset = Student.objects.select_related('curator').all()
@@ -26,6 +36,11 @@ class StudentViewSet(ModelViewSet):
         if course is not None:
             queryset = Student.objects.filter(course=course).select_related('curator').all()
         return queryset
+
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            return [IsAuthenticated()]
+        return [IsAdminUser()]
 
 
 class TeacherViewSet(ModelViewSet):
@@ -35,6 +50,13 @@ class TeacherViewSet(ModelViewSet):
     filterset_fields = ['groupsessions']
     search_fields = ['first_name', 'last_name']
     ordering_fields = ['first_name', 'last_name']
+    permission_classes = [IsAdminUser]
+    http_method_names = ['get', 'post', 'put', 'patch', 'delete', 'head', 'options']
+
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            return [IsAuthenticated()]
+        return [IsAdminUser()]
 
 
 class GroupSessionViewSet(ModelViewSet):
@@ -44,13 +66,27 @@ class GroupSessionViewSet(ModelViewSet):
     filterset_fields = ['teacher']
     search_fields = ['title']
     ordering_fields = ['title']
+    permission_classes = [IsAdminUser]
+    http_method_names = ['get', 'post', 'put', 'patch', 'delete', 'head', 'options']
+
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            return [IsAuthenticated()]
+        return [IsAdminUser()]
 
 
 class ReviewViewSet(ModelViewSet):
     serializer_class = ReviewSerializer
+    permission_classes = [IsAuthenticated]
+    http_method_names = ['get', 'post']
 
     def get_queryset(self):
         return Review.objects.filter(teacher_id=self.kwargs['teacher_pk'])
 
     def get_serializer_context(self):
         return {'teacher_id': self.kwargs['teacher_pk']}
+
+    def get_permissions(self):
+        if self.request.method == 'DELETE':
+            return [IsAdminUser()]
+        return [IsAuthenticated()]
