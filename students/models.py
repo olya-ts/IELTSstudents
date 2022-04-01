@@ -53,7 +53,7 @@ class Student(models.Model):
     objects = models.Manager()
 
     def __str__(self):
-        return self.last_name
+        return f'{self.first_name} {self.last_name}'
 
     class Meta:
         ordering = ['course', 'last_name']
@@ -70,7 +70,7 @@ class Teacher(models.Model):
     objects = models.Manager()
 
     def __str__(self):
-        return self.first_name
+        return f'{self.first_name} {self.last_name}'
 
     class Meta:
         ordering = ['first_name', 'last_name']
