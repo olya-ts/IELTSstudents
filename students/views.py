@@ -31,7 +31,6 @@ class CuratorViewSet(ModelViewSet):
         return super().destroy(request, *args, **kwargs)
 
 
-
 class StudentViewSet(ModelViewSet):
     serializer_class = StudentSerializer
     filter_backends = [OrderingFilter]
