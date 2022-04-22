@@ -1,6 +1,8 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.response import Response
+from rest_framework import status
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import Curator, Student, Teacher, GroupSession, Review
 from .serializers import StudentSerializer, CuratorSerializer, TeacherSerializer, GroupSessionSerializer, \
@@ -20,6 +22,14 @@ class CuratorViewSet(ModelViewSet):
         if self.request.method == 'GET':
             return [IsAuthenticated()]
         return [IsAdminUser()]
+
+    def destroy(self, request, *args, **kwargs):
+        if Student.objects.filter(curator_id=kwargs['pk']).count() > 0:
+            return Response(
+                {'error': 'Curator cannot be deleted as they are associated with students'},
+                status=status.HTTP_405_METHOD_NOT_ALLOWED)
+        return super().destroy(request, *args, **kwargs)
+
 
 
 class StudentViewSet(ModelViewSet):
