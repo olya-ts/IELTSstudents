@@ -87,7 +87,7 @@ class GroupSessionViewSet(ModelViewSet):
 class ReviewViewSet(ModelViewSet):
     serializer_class = ReviewSerializer
     permission_classes = [IsAuthenticated]
-    http_method_names = ['get', 'post']
+    http_method_names = ['get', 'post', 'delete']
 
     def get_queryset(self):
         return Review.objects.filter(teacher_id=self.kwargs['teacher_pk'])
