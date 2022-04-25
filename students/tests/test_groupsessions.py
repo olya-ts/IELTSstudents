@@ -1,6 +1,5 @@
 from rest_framework import status
 import pytest
-import random
 from model_bakery import baker
 from students.models import Teacher, GroupSession
 
@@ -104,12 +103,12 @@ class TestCreateGroupSession:
         authenticate_user(is_staff=True)
         response = create_new_instance(
             '/ielts/group_sessions/',
-            {'id': 1, 'title': 'kdjsvk', 'description': 'kdzjbfv', 'teacher': [teacher.pk]}
+            {'id': 34, 'title': 'kdjsvk', 'description': 'kdzjbfv', 'teacher': [teacher.pk]}
         )
 
         assert response.status_code == status.HTTP_201_CREATED
         assert response.data == {
-            'id': 1,
+            'id': 34,
             'title': 'kdjsvk',
             'description': 'kdzjbfv',
             'teacher': [teacher.pk]

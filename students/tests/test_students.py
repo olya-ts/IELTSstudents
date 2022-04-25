@@ -102,16 +102,6 @@ class TestCreateStudent:
         assert response.status_code == status.HTTP_400_BAD_REQUEST
         assert response.data['last_name'] is not None
 
-    # def test_if_data_is_valid_returns_201(self, create_new_instance, authenticate_user):
-    #     authenticate_user(is_staff=True)
-    #     response = create_new_instance(
-    #         '/ielts/students/',
-    #         {'id': 2, 'course': 23, 'curator': 'http://testserver/ielts/curators/2/', 'first_name': 'ghgj', 'last_name': 'kjdg'})
-    #
-    #     assert response.status_code == status.HTTP_201_CREATED
-    #     assert response.data['id'] > 0
-
-
 
 @pytest.mark.django_db
 class TestModifyPartlyStudent:

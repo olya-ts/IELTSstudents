@@ -1,8 +1,6 @@
 from rest_framework import status
 import pytest
 from model_bakery import baker
-from model_bakery.recipe import Recipe
-from datetime import date
 from students.models import Teacher, Review
 
 
